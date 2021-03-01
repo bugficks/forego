@@ -1,10 +1,10 @@
-module github.com/ddollar/forego
+module github.com/bugficks/forego
 
-go 1.14
+go 1.16
 
 require (
-	github.com/bugficks/forego v0.16.1 // indirect
-	github.com/daviddengcn/go-colortext v0.0.0-20150719211842-3b18c8575a43
-	github.com/subosito/gotenv v0.1.0
-	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
+	github.com/daviddengcn/go-colortext v1.0.0
+	github.com/stretchr/testify v1.7.0 // indirect
+	github.com/subosito/gotenv v1.2.0
+	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
 )

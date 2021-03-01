@@ -3,7 +3,7 @@ SRC = $(shell find . -name '*.go' -not -path './vendor/*')
 VERSION:=$(shell git describe --tags)
 LDFLAGS:=-X main.Version=$(VERSION)
 # https://stackoverflow.com/a/58185179
-LDFLAGS_EXTRA=-linkmode external -w -extldflags "-static"
+#LDFLAGS_EXTRA=-linkmode external -w -extldflags "-static"
 
 .PHONY: all build clean lint release test dist dist-clean
 
@@ -33,7 +33,7 @@ dist: dist-clean
 	mkdir -p dist/linux/armel  && GOOS=linux GOARCH=arm GOARM=5 go build -ldflags "$(LDFLAGS)" -o dist/linux/armel/forego
 	mkdir -p dist/linux/armhf  && GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "$(LDFLAGS)" -o dist/linux/armhf/forego
 	mkdir -p dist/darwin/amd64 && GOOS=darwin GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o dist/darwin/amd64/forego
-	mkdir -p dist/darwin/i386  && GOOS=darwin GOARCH=386 go build -ldflags "$(LDFLAGS)" -o dist/darwin/i386/forego
+#	mkdir -p dist/darwin/i386  && GOOS=darwin GOARCH=386 go build -ldflags "$(LDFLAGS)" -o dist/darwin/i386/forego
 
 release: dist
 	mkdir -p release
@@ -46,10 +46,16 @@ release: dist
 	tar -cvzf release/forego-linux-armel-$(VERSION).tar.gz -C dist/linux/armel forego
 	tar -cvzf release/forego-linux-armhf-$(VERSION).tar.gz -C dist/linux/armhf forego
 	tar -cvzf release/forego-darwin-amd64-$(VERSION).tar.gz -C dist/darwin/amd64 forego
-	tar -cvzf release/forego-darwin-i386-$(VERSION).tar.gz -C dist/darwin/i386 forego
+#	tar -cvzf release/forego-darwin-i386-$(VERSION).tar.gz -C dist/darwin/i386 forego
 
 test: lint build
 	go test -v -race -cover ./...
 
 $(BIN): $(SRC)
 	go build -ldflags "${LDFLAGS} ${LDFLAGS_EXTRA}" -o $@
+
+
+.PHONY: test-bin-in-docker
+test-bin-in-docker: build
+	docker run --rm -it -v$(CURDIR):/work:ro alpine:3 /work/forego version
+	docker run --rm -it -v$(CURDIR):/work:ro debian:stable /work/forego version
