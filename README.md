@@ -1,12 +1,15 @@
+![latest 0.21.0](https://img.shields.io/badge/latest-0.21.0-green.svg?style=flat)
+[![CircleCI](https://circleci.com/gh/bugficks/forego.svg?style=svg)](https://circleci.com/gh/bugficks/forego)
+![Apache 2.0](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat)
+![Go Version](https://img.shields.io/github/go-mod/go-version/bugficks/forego)
+
 ## forego
-+ https://github.com/ddollar/forego/pull/105
-+ https://github.com/ddollar/forego/pull/124
-
-<a href="https://circleci.com/gh/bugficks/forego">
-  <img align="right" src="https://circleci.com/gh/bugficks/forego.svg?style=svg">
-</a>
-
 [Foreman](https://github.com/ddollar/foreman) in Go.
+
+Changes:
++ [Fix accidentally stateful port calculation #105](https://github.com/ddollar/forego/pull/105)
++ [Add NO_COLOR, inject version tag, and more #124](https://github.com/ddollar/forego/pull/124)
++ [Add procNum to the port calculation for startProc #1](https://github.com/bugficks/forego/pull/1)
 
 ### Installation
 
